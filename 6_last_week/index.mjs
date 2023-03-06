@@ -4,7 +4,7 @@ export const handler = async(event) => {
     const dynamodb = new AWS.DynamoDB({region: 'eu-central-1'})
 
     var params = {
-        TableName: "NASA_slike"
+        TableName: "slike"
     };
 
     let data = await dynamodb.scan(params).promise();

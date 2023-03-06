@@ -14,31 +14,28 @@ export const handler = (event) => {
     let ses = new AWS.SES({region: 'eu-central-1'})
 
     var params = {
-    Destination: { 
-        ToAddresses: [
-            'vojislavlazic00@gmail.com',
-            'sara.djurdjevic3z@gmail.com'
-        ]
-    },
-    Message: {
-        Body: {
-        Text: {
-            Charset: "UTF-8",
-            Data: body
-        }
+        Destination: {
+            ToAddresses: [
+            ]
         },
-        Subject: {
-            Charset: 'UTF-8',
-            Data: "New image added - " + data.title.stringValue
-        }
-        },
-    Source: 'voja@tfwno.gf'
+        Message: {
+            Body: {
+            Text: {
+                Charset: "UTF-8",
+                Data: body
+            }
+            },
+            Subject: {
+                Charset: 'UTF-8',
+                Data: "New image added - " + data.title.stringValue
+            }
+            },
+        Source: ''
     };
 
-    let sendMailPromise = ses.sendEmail(params).promise();
-    sendMailPromise.then(
-    function(data) {
-        console.log(data.MessageId);
+    ses.sendEmail(params).promise().then(
+        function(data) {
+            console.log(data.MessageId);
     }).catch(
         function(err) {
         console.error(err, err.stack);

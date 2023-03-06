@@ -2,7 +2,7 @@ import AWS from 'aws-sdk'
 import 'node-fetch'
 
 export const handler = async(event) => {
-    const client = new AWS.DynamoDB({ region: "eu-central-1" });
+    const client = new AWS.DynamoDB({ region: "us-east-1" });
 
     const API_KEY = "U0wmYbZi59wgDkBeiE8vZiNZER3rl1bEZMvDFfRe"
     const url = "https://api.nasa.gov/planetary/apod?api_key=" + API_KEY
@@ -40,9 +40,8 @@ export const handler = async(event) => {
             }
         }, 
         ReturnConsumedCapacity: "TOTAL", 
-        TableName: "NASA_slike"
+        TableName: "nasa-slike"
     };
 
-    let putItemResponse = await client.putItem(params).promise()
-    console.log(putItemResponse);
+    return await client.putItem(params).promise()
 };
